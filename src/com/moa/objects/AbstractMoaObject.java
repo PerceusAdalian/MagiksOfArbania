@@ -108,7 +108,7 @@ public abstract class AbstractMoaObject
 				case ARCANO -> color = '9';
 			};
 			
-			meta.setDisplayName(MoaPrintUtils.ColorParser("&r&"+color+"&ko&r&fCatalyst of &l"+elementType.getElement()+" &r&"+color+"&ko"));	
+			meta.setDisplayName(MoaPrintUtils.ColorParser("&r&"+color+"&ko&r&f Catalyst of &l"+elementType.getElement()+" &r&"+color+"&ko"));	
 			meta.getPersistentDataContainer().set(moaCatalyst, PersistentDataType.STRING, internalName.toString());
 		} 
 		else 
@@ -122,7 +122,10 @@ public abstract class AbstractMoaObject
 		}
 		lore.add("\n");
 		
-		if (isCatalyst()) lore.add("&r&fUse '&b&o/moa spellhelp&r&f' for more details.");
+		if (isCatalyst()) 
+		{
+			lore.add(MoaPrintUtils.ColorParser("&r&fUse &b&o/moa spellhelp&r&f for more details."));
+		}
 		
 		meta.setLore(lore);
 		meta.getPersistentDataContainer().set(moaObject, PersistentDataType.STRING, internalName.toString());
