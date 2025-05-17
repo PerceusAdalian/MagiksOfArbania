@@ -6,15 +6,11 @@ import java.util.Random;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class MoaParticles 
 {
-	public static <T> void drawPoint(Location source, Particle p, double heightOffset, @Nullable T data) 
-	{
-		Vector v = source.toVector();
-		source.getWorld().spawnParticle(p, v.getX(), v.getY() + heightOffset, v.getZ(), 0, 0, 0, 0, data);
-	}
 	
 	public static <T> void drawLine(Location source, Location target, double interval, double heightOffset, Particle p, @Nullable T data) 
 	{
@@ -265,6 +261,13 @@ public class MoaParticles
 	        double z = location.getZ() + (rand.nextDouble() * 2 - 1) * domain;
 			w.spawnParticle(particle, new Location(w,x,y,z), 0, 0, 0, 0, data);
 		}
+	}
+	
+	public static void drawInfernoCastSigil(Player p) 
+	{
+		MoaParticles.drawDisc(p.getLocation(), p.getWidth()+1, 1, 8, 0.25, Particle.LAVA, null);
+		MoaParticles.drawDisc(p.getLocation(), p.getWidth()+1.25, 2, 6, 0.35, Particle.SMOKE, null);
+		MoaParticles.drawDisc(p.getLocation(), p.getWidth()+1.5, 2, 9, 0.45, Particle.ASH, null);
 	}
 }
 

@@ -1,4 +1,4 @@
-package com.moa.objects;
+package com.moa.utils;
 
 public enum ElementType 
 {

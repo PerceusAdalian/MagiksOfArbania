@@ -11,6 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
 import com.moa.MagiksOfArbania;
+import com.moa.utils.ElementType;
 import com.moa.utils.MoaPrintUtils;
 
 public abstract class AbstractMoaObject 
@@ -23,7 +24,7 @@ public abstract class AbstractMoaObject
 	private Material material;
 	private ElementType elementType;
 	private boolean isCatalyst = false;
-	
+
 	public AbstractMoaObject(String name, String internalName, Material material, String...itemDescription) 
 	{
 		this.name = name;
@@ -77,11 +78,15 @@ public abstract class AbstractMoaObject
 	{
 		return isCatalyst;
 	}
+	public ElementType getElementType() 
+	{
+		return elementType;
+	}
 	public static NamespacedKey getMoaobject() 
 	{
 		return moaObject;
 	}
-
+	
 	public abstract boolean Cast(PlayerInteractEvent e);
 	
 	public ItemStack bake() 

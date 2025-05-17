@@ -4,17 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import com.moa.objects.AbstractMoaObject;
 import com.moa.objects.MoaItemRegistry;
+import com.moa.utils.ElementType;
+import com.moa.utils.MoaEffects;
 import com.moa.utils.MoaPrintUtils;
+import com.moa.utils.menus.AbstractMoaGui;
+import com.moa.utils.menus.MoaGuiHandler;
+import com.moa.utils.menus.instances.InfernoGuide;
+import com.moa.utils.menus.instances.MoaMainMenu;
+import com.moa.utils.menus.instances.MoaSpellCodexMenu;
 
 public class MoaCommand implements CommandExecutor, TabCompleter
 {
@@ -93,6 +103,37 @@ public class MoaCommand implements CommandExecutor, TabCompleter
 				return true;
 		}
 		
+		if (args[0].equals("menu")) 
+		{
+			MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_CHISELED_BOOKSHELF_PICKUP_ENCHANTED, SoundCategory.MASTER, 1, 1);
+			MoaGuiHandler.open(p, new MoaMainMenu(p));
+		}
+		
+		if (args[0].equals("spellhelp")) 
+		{
+			ItemStack held = p.getInventory().getItem(EquipmentSlot.HAND);
+			
+			if (held.getItemMeta() != null && held.getItemMeta().getPersistentDataContainer().has(AbstractMoaObject.moaCatalyst)) 
+			{
+				AbstractMoaObject obj = MoaItemRegistry.itemRegistry.get(held.getItemMeta().getPersistentDataContainer().get(AbstractMoaObject.moaCatalyst, PersistentDataType.STRING));
+				ElementType type = obj.getElementType();
+				AbstractMoaGui gui = switch (type) 
+				{
+				case INFERNO -> gui = new InfernoGuide(p);
+				default -> throw new IllegalArgumentException("Unexpected value: " + type);
+				};
+				MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_CHISELED_BOOKSHELF_PICKUP_ENCHANTED, SoundCategory.MASTER, 1, 1);
+				MoaGuiHandler.open(p, gui);
+				return true;
+			}
+			else 
+			{				
+				MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_CHISELED_BOOKSHELF_PICKUP_ENCHANTED, SoundCategory.MASTER, 1, 1);
+				MoaGuiHandler.open(p, new MoaSpellCodexMenu(p));
+				return true;
+			}
+		}
+		
 		return false;
 	}
 
@@ -103,14 +144,15 @@ public class MoaCommand implements CommandExecutor, TabCompleter
 		return switch(args.length) 
 		{
 			case 0 -> List.of("moa");
-			case 1 -> List.of("debug", "generate");
+			case 1 -> List.of("debug", "generate","menu", "spellhelp");
 			case 2 -> 
 			{
 				yield switch(args[0])
 				{
 					case "debug" -> List.of();
 					case "generate" -> new ArrayList<>(MoaItemRegistry.itemRegistry.keySet());
-//					case "Moamenu" -> List.of();
+					case "menu" -> List.of();
+					case "spellhelp" -> List.of();
 					default -> List.of();
 				};
 			}

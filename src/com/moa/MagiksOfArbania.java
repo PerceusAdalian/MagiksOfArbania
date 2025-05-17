@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.moa.objects.CastHandler;
 import com.moa.objects.MoaItemRegistry;
 import com.moa.utils.MoaPrintUtils;
+import com.moa.utils.menus.MoaGuiHandler;
 
 public class MagiksOfArbania extends JavaPlugin
 {
@@ -20,6 +21,7 @@ public class MagiksOfArbania extends JavaPlugin
 		
 		this.getCommand("moa").setExecutor(new MoaCommand());;
 		Bukkit.getPluginManager().registerEvents(new CastHandler(), instance);
+		MoaGuiHandler.registerEventListener(instance);
 		MoaItemRegistry.itemInit();
 		MoaPrintUtils.MoaConsolePrint("Magiks Of Arbania -- &aOK");
 	}
