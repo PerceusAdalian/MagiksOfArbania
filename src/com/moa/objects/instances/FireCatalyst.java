@@ -90,6 +90,38 @@ public class FireCatalyst extends AbstractMoaObject
 			}
 		}
 		
+		if (MoaPlayerActions.leftClickAir(e)) 
+		{
+			//Registration if the map to player is null or doesn't contain the player; for primary spells.
+			
+			if (isChanneled.get(uuid) == null) 
+			{
+				isChanneled.put(uuid, true);
+				MoaParticles.drawInfernoCastSigil(p);
+				MoaPrintUtils.PrintToActionBar(p, "Channeling..");
+				MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 1, 1);
+				return true;
+			}
+			
+			//Execute toggle
+			if (Boolean.TRUE.equals(isChanneled.get(uuid))) 
+			{
+			    isChanneled.put(uuid, false);
+				MoaParticles.drawInfernoCastSigil(p);
+			    MoaPrintUtils.PrintToActionBar(p, "No longer channeling..");
+			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, SoundCategory.MASTER, 1, 1);
+			} 
+			else 
+			{
+			    isChanneled.put(uuid, true);
+				MoaParticles.drawInfernoCastSigil(p);
+			    MoaPrintUtils.PrintToActionBar(p, "Channeling..");
+			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 1, 1);
+			}
+
+		}
+		
+		//Alt spells
 		if (MoaPlayerActions.shiftRightClickAir(e)) 
 		{
 			if (isHyperCasting.get(uuid) == null) isHyperCasting.put(uuid, false);
@@ -158,37 +190,7 @@ public class FireCatalyst extends AbstractMoaObject
 			}
 		}
 		
-		if (MoaPlayerActions.leftClickAir(e)) 
-		{
-			//Registration if the map to player is null or doesn't contain the player; for primary spells.
-			
-			if (isChanneled.get(uuid) == null) 
-			{
-				isChanneled.put(uuid, true);
-				MoaParticles.drawInfernoCastSigil(p);
-				MoaPrintUtils.PrintToActionBar(p, "Channeling..");
-				MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 1, 1);
-				return true;
-			}
-			
-			//Execute toggle
-			if (Boolean.TRUE.equals(isChanneled.get(uuid))) 
-			{
-			    isChanneled.put(uuid, false);
-				MoaParticles.drawInfernoCastSigil(p);
-			    MoaPrintUtils.PrintToActionBar(p, "No longer channeling..");
-			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, SoundCategory.MASTER, 1, 1);
-			} 
-			else 
-			{
-			    isChanneled.put(uuid, true);
-				MoaParticles.drawInfernoCastSigil(p);
-			    MoaPrintUtils.PrintToActionBar(p, "Channeling..");
-			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 1, 1);
-			}
-
-		}
-		
+		//Main spells
 		if (MoaPlayerActions.rightClickAir(e)) 
 		{
 			//Registration if the player just logged in and the map is not yet bound to the player.
