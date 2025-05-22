@@ -46,12 +46,63 @@ public class InfernoGuide extends AbstractMoaGui
 			MoaEffects.playSound(p, p.getLocation(), sounds.iterator().next(), SoundCategory.MASTER, 1, 1);
 		});
 
-		MoaGuiButton.button(Material.PAPER).setName("&r&f&lSpell: &r&fFireball")
+		MoaGuiButton.button(Material.BOOK).setName("Inferno Main Combo")
+		.setLore("&r&fThe main combo for the Inferno Catalyst may be activated using",
+				"&r&f&lRight-Click&r&f and consists of four spells:",
+				"&r&f1&l. &r&fFireball",
+				"&r&f&l2. &r&fArcfire",
+				"&r&f&l3. &r&fSol Gate",
+				"&r&f&l4. &r&fDragons' Respite",
+				"&r&f&lCombo Timer&r&f: 10 &b&oseconds")
+		.place(this, 10, e->{
+			e.setCancelled(true);
+			Player p = (Player) e.getWhoClicked();
+			MoaEffects.playSound(p, p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, SoundCategory.MASTER, 1, 1);
+		});
+		
+		MoaGuiButton.button(Material.PAPER).setName("&r&f&lCombo Spell 1: &r&fFireball")
 		.setLore(MoaPrintUtils.assignAbilityType(MoaAbilityTypes.OFFENSIVE),
 		"&r&f&lActivation&r&f: Right-Click",
 		"&r&f&lDescription: ",
-		"&r&fSummon forth a small ball of &cFire&f that explodes on impact.")
-		.place(this, 10, e->
+		"&r&fSummon forth a ball of &cFire&f that explodes on impact.")
+		.place(this, 11, e->
+		{
+			e.setCancelled(true);
+			Player p = (Player) e.getWhoClicked();
+			MoaEffects.playSound(p, p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, SoundCategory.MASTER, 1, 1);
+		});
+		
+		MoaGuiButton.button(Material.PAPER).setName("&r&f&lCombo Spell 2: &r&fArcfire")
+		.setLore(MoaPrintUtils.assignAbilityType(MoaAbilityTypes.OFFENSIVE),
+		"&r&f&lActivation&r&f: Right-Click",
+		"&r&f&lDescription: ",
+		"&r&fSummon forth several small whisps of &cFire&f that ignites objects.")
+		.place(this, 12, e->
+		{
+			e.setCancelled(true);
+			Player p = (Player) e.getWhoClicked();
+			MoaEffects.playSound(p, p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, SoundCategory.MASTER, 1, 1);
+		});
+		
+		MoaGuiButton.button(Material.PAPER).setName("&r&f&lCombo Spell 3: &r&fSol Gate")
+		.setLore(MoaPrintUtils.assignAbilityType(MoaAbilityTypes.OFFENSIVE),
+		"&r&f&lActivation&r&f: Right-Click",
+		"&r&f&lDescription: ",
+		"&r&fSummon forth a large ball of &cFire&f that explodes on impact.")
+		.place(this, 13, e->
+		{
+			e.setCancelled(true);
+			Player p = (Player) e.getWhoClicked();
+			MoaEffects.playSound(p, p.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, SoundCategory.MASTER, 1, 1);
+		});
+		
+		MoaGuiButton.button(Material.PAPER).setName("&r&f&lCombo Spell 4: &r&fDragons' Respite")
+		.setLore(MoaPrintUtils.assignAbilityType(MoaAbilityTypes.OFFENSIVE),
+		"&r&f&lActivation&r&f: Right-Click",
+		"&r&f&lDescription: ",
+		"&r&fSummon forth a concentrated &dChaos Flame&f projectile that",
+		"&r&fexplodes on impact and leaves behind a DOT-AOE.")
+		.place(this, 14, e->
 		{
 			e.setCancelled(true);
 			Player p = (Player) e.getWhoClicked();
@@ -60,10 +111,10 @@ public class InfernoGuide extends AbstractMoaGui
 		
 		MoaGuiButton.button(Material.PAPER).setName("&r&f&lSpell: &r&fIgnite")
 		.setLore(MoaPrintUtils.assignAbilityType(MoaAbilityTypes.OFFENSIVE),
-		"&r&f&lActivation&r&f: Right-Click &b&oand&r&7 <= &f&l10&r &d&ometers&r&7 from target.",
+		"&r&f&lActivation&r&f: Right-Click &b&o&&r&f target <= &f&l5&r &d&ometers",
 		"&r&f&lDescription: ",
 		"&r&fIgnite thy enemy within close range for 10s.")
-		.place(this, 11, e->
+		.place(this, 19, e->
 		{
 			e.setCancelled(true);
 			Player p = (Player) e.getWhoClicked();

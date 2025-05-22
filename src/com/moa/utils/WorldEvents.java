@@ -2,9 +2,12 @@ package com.moa.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.RayTraceResult;
 
@@ -35,6 +38,31 @@ public class WorldEvents
 	    if(result == null || result.getHitBlock() == null) return null;
 	    return result.getHitBlock();
 	}
+	
+	/**
+	 * @param source via player's location
+	 * @param radius to check for mobs
+	 * @param action to accept for each entity (LivingEntity by default)
+	 */
+	public static void getNearbyEntities(Player source, int radius, Consumer<LivingEntity> action) 
+	{
+	    List<Entity> nearbyEntities = source.getNearbyEntities(radius, radius, radius);
+	    
+	    if (nearbyEntities.isEmpty()) 
+	    {
+	        MoaPrintUtils.MoaFormatError(source, "No targets found.");
+	        return;
+	    }
+
+	    for (Entity target : nearbyEntities) 
+	    {
+	        if (target instanceof LivingEntity livingTarget) 
+	        {
+	            action.accept(livingTarget);
+	        }
+	    }
+	}
+
 }
 
 //Imported From Project Nexus
