@@ -81,12 +81,14 @@ public class FireCatalyst extends AbstractMoaObject
 				isHyperCasting.put(uuid, false);
 			    MoaPrintUtils.PrintToActionBar(p, "Hyper casting disengaged..");
 			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, SoundCategory.MASTER, 1, 1);
+			    return true;
 			} 
 			else 
 			{
 				isHyperCasting.put(uuid, true);
 			    MoaPrintUtils.PrintToActionBar(p, "Hyper casting..");
 			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 1, 1);
+			    return true;
 			}
 		}
 		
@@ -110,6 +112,7 @@ public class FireCatalyst extends AbstractMoaObject
 				MoaParticles.drawInfernoCastSigil(p);
 			    MoaPrintUtils.PrintToActionBar(p, "No longer channeling..");
 			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, SoundCategory.MASTER, 1, 1);
+			    return true;
 			} 
 			else 
 			{
@@ -117,6 +120,7 @@ public class FireCatalyst extends AbstractMoaObject
 				MoaParticles.drawInfernoCastSigil(p);
 			    MoaPrintUtils.PrintToActionBar(p, "Channeling..");
 			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_ACTIVATE, SoundCategory.MASTER, 1, 1);
+			    return true;
 			}
 
 		}
@@ -125,8 +129,9 @@ public class FireCatalyst extends AbstractMoaObject
 		if (MoaPlayerActions.shiftRightClickAir(e)) 
 		{
 			if (isHyperCasting.get(uuid) == null) isHyperCasting.put(uuid, false);
+			if (isChanneled.get(uuid) == null) isChanneled.put(uuid, false);
 			
-			if (isHyperCasting.get(uuid).equals(false) && isChanneled.get(uuid).equals(false)) 
+			if ((isHyperCasting.get(uuid).equals(false) && isChanneled.get(uuid).equals(false))) 
 			{
 				MoaParticles.drawInfernoCastSigil(p);
 				MoaEffects.playSound(p, p.getLocation(), Sound.ENTITY_BLAZE_AMBIENT, SoundCategory.MASTER, 1, 1);
@@ -134,7 +139,7 @@ public class FireCatalyst extends AbstractMoaObject
 				return true;
 			}
 			
-			if (isHyperCasting.get(uuid).equals(true) && isChanneled.get(uuid).equals(false)) 
+			if ((isHyperCasting.get(uuid).equals(false) && isChanneled.get(uuid).equals(true))) 
 			{
 				MoaParticles.drawInfernoCastSigil(p);
 				MoaEffects.playSound(p, p.getLocation(), Sound.ENTITY_BLAZE_AMBIENT, SoundCategory.MASTER, 1, 1);
@@ -142,12 +147,12 @@ public class FireCatalyst extends AbstractMoaObject
 				MoaEffects.add(p, PotionEffectType.HASTE, 600, 2);
 				MoaEffects.add(p, PotionEffectType.SPEED, 600, 2);
 				MoaEffects.add(p, PotionEffectType.STRENGTH, 600, 2);
-				isHyperCasting.put(uuid, false);
+				isChanneled.put(uuid, false);
 				MoaPrintUtils.PrintToActionBar(p, "Hyper casting disengaged..");
 				return true;
 			}
 			
-			if (isHyperCasting.get(uuid).equals(false) && isChanneled.get(uuid).equals(true)) 
+			if ((isHyperCasting.get(uuid).equals(true) && isChanneled.get(uuid).equals(false))) 
 			{
 				MoaEffects.playSound(p, p.getLocation(), Sound.ENTITY_BLAZE_AMBIENT, SoundCategory.MASTER, 1, 1);
 				MoaParticles.drawInfernoCastSigil(p);
@@ -157,13 +162,13 @@ public class FireCatalyst extends AbstractMoaObject
 					MoaParticles.drawDisc(target.getLocation(), target.getWidth(), 1, 20, 0, Particle.CRIMSON_SPORE, null);
 					MoaParticles.drawSpiralVortex(target.getLocation(), 2, target.getHeight()+0.5, 0, Particle.LAVA, null);
 				});
-				isChanneled.put(uuid, false);
+				isHyperCasting.put(uuid, false);
 				MoaPrintUtils.PrintToActionBar(p, "No longer channeling..");
 			    MoaEffects.playSound(p, p.getLocation(), Sound.BLOCK_BEACON_DEACTIVATE, SoundCategory.MASTER, 1, 1);
 				return true; 
 			}
 			
-			if (isHyperCasting.get(uuid).equals(true) && isChanneled.get(uuid).equals(true)) 
+			if ((isHyperCasting.get(uuid).equals(true) && isChanneled.get(uuid).equals(true))) 
 			{
 				MoaEffects.playSound(p, p.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, SoundCategory.MASTER, 1, 1);
 				MoaParticles.drawInfernoCastSigil(p);
@@ -244,7 +249,7 @@ public class FireCatalyst extends AbstractMoaObject
 						MoaEffects.playSound(p, p.getLocation(), Sound.ENTITY_BLAZE_SHOOT, SoundCategory.MASTER, 1, 1);
 						MoaParticles.drawInfernoCastSigil(p);
 						SmallFireball fb = (SmallFireball) p.getWorld().spawnEntity(p.getEyeLocation().add(p.getEyeLocation().getDirection().normalize().multiply(1.5)), EntityType.SMALL_FIREBALL);
-						fb.setGlowing(true);
+						fb.setYield(2);
 						Bukkit.getScheduler().runTaskLater(MagiksOfArbania.instance, ()->
 						{
 							MoaEffects.playSound(p, p.getLocation(), Sound.ENTITY_BLAZE_SHOOT, SoundCategory.MASTER, 1, 1);

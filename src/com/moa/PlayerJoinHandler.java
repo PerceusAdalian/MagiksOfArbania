@@ -8,6 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import com.moa.objects.AbstractMoaObject;
 import com.moa.objects.MoaItemRegistry;
+import com.moa.objects.SpellHolders;
 
 public class PlayerJoinHandler implements Listener
 {
@@ -16,8 +17,10 @@ public class PlayerJoinHandler implements Listener
 	{
 		Player p = e.getPlayer();
 		p.setCanPickupItems(true);
+		
 		if (p.isOp()) 
 		{
+			SpellHolders.init(p);
 			p.setGameMode(GameMode.CREATIVE);
 			p.setAllowFlight(true);
 			return;
@@ -25,11 +28,13 @@ public class PlayerJoinHandler implements Listener
 
 		if (!p.hasPlayedBefore()) 
 		{
+			SpellHolders.init(p);
 			AbstractMoaObject crystal = MoaItemRegistry.itemRegistry.values().iterator().next();
 			p.getInventory().addItem(crystal.bake());
 			return;
 		}
-
+		
+		SpellHolders.init(p);
 		p.setGameMode(GameMode.SURVIVAL);
 		p.setAllowFlight(false);
 		p.setFlying(false);
