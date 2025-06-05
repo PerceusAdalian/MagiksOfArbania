@@ -81,6 +81,7 @@ public class WorldEvents
 	    {
 	        if (target instanceof LivingEntity livingTarget) 
 	        {
+	        	if (target instanceof Player) continue;
 	            action.accept(livingTarget);
 	        }
 	    }

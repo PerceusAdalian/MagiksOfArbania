@@ -55,6 +55,8 @@ public class GlacioCatalyst extends AbstractMoaObject
 	//private static Map<UUID, Integer> combo2Tier = new HashMap<>();
 	//private static Map<UUID, Boolean> combo2EndNaturally = new HashMap<>();
 	
+	//NOTE: Class is not fully implemented. Combo 2 when type == null arrows do not fly inwards and level. Spiral particles too high, and targeted combo arcs do not play. 
+	
 	@Override
 	public boolean Cast(PlayerInteractEvent e) 
 	{
@@ -305,7 +307,7 @@ public class GlacioCatalyst extends AbstractMoaObject
 				}
 			}
 			
-			//starts the combo and 10s cooldown
+			//Target != Null
 			if (!comboTier.containsKey(uuid)) 
 			{
 				if (comboEndNaturally.containsKey(uuid)) 

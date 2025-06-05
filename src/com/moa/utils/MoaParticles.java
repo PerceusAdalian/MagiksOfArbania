@@ -3,7 +3,6 @@ package com.moa.utils;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -295,7 +294,7 @@ public class MoaParticles
 	{
 		MoaParticles.drawDisc(p.getLocation(), p.getWidth()+1, 1, 8, 0.25, Particle.FALLING_WATER, null);
 		MoaParticles.drawDisc(p.getLocation(), p.getWidth()+1.25, 2, 6, 0.35, Particle.CLOUD, null);
-		MoaParticles.drawDisc(p.getLocation(), p.getWidth()+1.5, 2, 9, 0.45, Particle.EFFECT, Color.BLUE);
+		MoaParticles.drawDisc(p.getLocation(), p.getWidth()+1.5, 2, 9, 0.45, Particle.EFFECT, null);
 	}
 }
 
