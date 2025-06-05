@@ -1,0 +1,8 @@
+main: com.moa.MagiksOfArbania
+name: MagiksOfArbania
+version: 0.1.0
+api-version: 1.21
+commands:
+    moa:
+        description: MagiksOfArbania's Command Line
+        usage: /moa
