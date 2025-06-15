@@ -10,7 +10,7 @@ import com.moa.objects.instances.GlacioCatalyst;
 import com.moa.objects.instances.InfernoCatalyst;
 
 /**
- * @Documented MoaItemRegistry A class to handle Nexus Objects for generation, debugging, etc.
+ * @Documented MoaItemRegistry A class to handle Moa Objects for generation, debugging, etc.
  * @Description 
  *  		Get each class's internal constructor and allow for reflection to access internal methods. 
  *  		Finally, put each object into itemRegistry via their instance and refer to the object's internal name.
