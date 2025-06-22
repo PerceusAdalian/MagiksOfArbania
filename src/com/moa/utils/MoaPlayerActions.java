@@ -28,6 +28,11 @@ public class MoaPlayerActions
 		return e.getAction().equals(Action.RIGHT_CLICK_BLOCK);
 	}
 	
+	public static boolean leftClickBlock(PlayerInteractEvent e) 
+	{
+		return e.getAction().equals(Action.LEFT_CLICK_BLOCK);
+	}
+	
 	public static boolean shiftRightClickAir(PlayerInteractEvent e) 
 	{	
 		return e.getPlayer().isSneaking() && e.getAction().equals(Action.RIGHT_CLICK_AIR);
@@ -41,6 +46,11 @@ public class MoaPlayerActions
 	public static boolean shiftRightClickBlock(PlayerInteractEvent e) 
 	{
 		return e.getPlayer().isSneaking() && e.getAction().equals(Action.RIGHT_CLICK_BLOCK);
+	}
+	
+	public static boolean shiftLeftClickBlock(PlayerInteractEvent e) 
+	{
+		return e.getPlayer().isSneaking() && e.getAction().equals(Action.LEFT_CLICK_BLOCK);
 	}
 	
 	public static Map<UUID, Long> timeMap = new HashMap<>();
